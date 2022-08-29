@@ -96,5 +96,311 @@ isFinite(NaN);        // false
 
 ## Strings
 
+They're UTF-16 code units. Each Unicode character is either 1 or 2 code units.
+
+```
+'hello'.length;                           // 5
+'hello'.charAt(0);                        // "h"
+'hello, world'.replace('world', 'mars');  // "hello, mars"
+'hello'.toUpperCase();                    // "HELLO"
+```
+
+## `null` vs. `undefined`
+
+`null` is a deliberate non-value
+
+`undefined` is an uninitialized variable (actually a constant)
+
+
+## Boolean
+
+`true` and `false` are keywords
+
+Things that evaluate to `false`:
+
+- `false`
+- `0`
+- empty strings (`""`)
+- `NaN`
+- `null`
+- `undefined`
+
+Things that evaluate to `true`
+
+- Everything else
+
+Can convert explicitly with `Boolean()`
+
+## Variables
+
+Traditionally, blocks had no scope. But starting with ECMAScript2015, `let` and `const` were introduced.
+
+`let` declares block-level variables
+
+`const` is also block-level
+
+`var` function level (is hoisted)
+
+## Equality
+
+`==` and `!=` perform type coercion
+
+`===` and `!==` do not perform type coercion (prefer these ✅)
+
+
+## Operators
+
+`&&` and `||` are short-circuit.
+
+💡Checking for null objects before accessing their attribs:
+
+```
+const name = o && o.getName();
+```
+
+💡"Caching" values
+
+```
+// assumes falsey values can't happen :-(
+const name = cachedName || (cachedName = getName());
+```
+
+## Control Structures
+
+if/else
+
+```
+let name = 'kittens';
+
+if (name === 'puppies') {
+  name += ' woof';
+} else if (name === 'kittens') {
+  name += ' meow';
+} else {
+  name += '!';
+}
+```
+
+while and do/while
+
+```
+while(true) {
+  // infinity!
+}
+
+let input;
+do {
+  input = get_input();
+} while (inputIsNotValid(input));
+```
+
+for
+
+```
+for (let i = 0; i < 5; i++) {
+  // runs 5 times
+}
+```
+
+for/of
+
+```
+for (const value of array) {
+  // do something with value
+}
+```
+
+for/in
+
+```
+for (const prop in object) {
+  // do something with prop
+}
+```
+
+switch
+
+```
+// comparisons made with ===
+switch (action) {
+  case 'sketch':  // will fallthrough
+  case 'draw':
+    drawIt();
+    break;
+  case 'eat';
+    eatIt();
+    break;
+  default:
+    takeNap();
+}
+```
+
+
+## Objects
+
+JavaScript objects can be thought of as name-value pairs.
+
+Similar to hashes in Perl, Ruby.
+
+Name is always a JavaScript string.
+
+```
+const obj = new Object();   // same as below
+const obj = {};             // "object literal syntax", preferred
+```
+
+Accessing elements:
+
+```
+const obj = {
+  name: 'Carrot',
+  _for: 'Max', // 'for' is a reserved word, use '_for' instead.
+  details: {
+    color: 'orange',
+    size: 12
+  }
+};
+
+obj.details.color;        // orange
+obj['details']['size'];   // 12
+```
+
+Iterate through with `for (const x in obj) { x }`
+
+## Object Prototypes
+
+```
+// prototype
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+// instance
+const you = new Person('You', 46)''
+
+// you can still define arbitrary attributes
+you.hair = true;
+```
+
+## Arrays
+
+They work like regular objects but have a magic property called `length.`
+
+```
+const a = ['dog', 'cat', 'hen'];
+a[100] = 'fox';
+a.length;                             // 101
+typeof a[90];                         // undefined
+```
+
+Old-fashioned iteration
+
+```
+for (let i = 0; i < a.length; i++) {
+  // Do something with a[i]
+}
+```
+
+ES2015 style iteration
+
+```
+const ary = ['dog', 'cat', 'hen'];
+ary[10] = 'fox';
+ary.length; // 111
+
+for (const x of ary) {
+  console.log(x);
+}
+
+/*
+dog
+cat
+hen
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+undefined
+fox
+*/
+```
+
+ECMAScript5
+
+```
+['dog', 'cat', 'hen'].forEach(function(currentValue, index, array) {
+  console.log((index + 1) + '/' + array.length + ' ' + currentValue);
+});
+
+/*
+1/3 dog
+2/3 cat
+3/3 hen
+ */
+```
+
+## Functions
+
+You can call a function without the parameters it expects -- all parameters are optional. Omitted params will `undefined`.
+
+Can also pass in extra params.
+
+```
+function add(x,y) {
+  return x + y
+}
+
+add();          // NaN
+add(2);         // NaN
+add(2, 3, 4);   // 5 (the last arg was ignored)
+```
+
+`arguments` - An array of all arguments.
+
+```
+function add() {
+  let sum = 0;
+  for (const x of arguments) {
+    sum += x;
+  }
+  return sum;
+}
+
+add(1, 2, 3, 4);    // 10
+```
+
+### Rest Parameter Operator
+
+```
+function foo(a, ...otherCrap) {
+  console.log('a is ' + a + ' and there were ' + otherCrap.length + ' args I do not care about');
+}
+
+foo(42);                          // a is 42 and there were 0 args I do not care about
+foo(42, "your", "mom", "hello");  // a is 42 and there were 3 args I do not care about
+```
+
+### Apply
+
+```
+function cool() {
+  console.log('got ' + arguments.length + ' args');
+}
+
+my_ary = [1, 2, 3];
+
+cool(my_ary);                 // got 1 args
+cool.apply(null, my_ary);     // got 3 args
+```
+
+### Anonymous Functions
+
+
+
+
+
 
 
