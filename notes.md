@@ -10,7 +10,7 @@ JavaScript supports OOP with object prototypes instead of classes.
 
 JavaScript supports functional programming: functions are objects and may be stored in variables, passed around like any other object.
 
-# Types
+## Types
 
 - Number
 - BigInt
@@ -25,17 +25,7 @@ JavaScript supports functional programming: functions are objects and may be sto
 - undefined
 - some built-in Error types
 
-# Strings
-
-New-school interpolation
-
-```
-let x = 42;
-let name = "John";
-console.log(`${name} is ${x} years old.`);
-```
-
-# Numbers
+## Numbers
 
 Number is a double-precision 64-bit IEE754 value.
 
@@ -50,7 +40,6 @@ An *apparent integer* is actually a float. 💩
 ## Math Object
 
 `Math` provides advanced functions and constants e.g. `Math.sin` and `Math.PI`.
-
 
 ## Parsing / Converting
 
@@ -113,6 +102,14 @@ They're UTF-16 code units. Each Unicode character is either 1 or 2 code units.
 'hello'.charAt(0);                        // "h"
 'hello, world'.replace('world', 'mars');  // "hello, mars"
 'hello'.toUpperCase();                    // "HELLO"
+```
+
+New-school interpolation
+
+```
+let x = 42;
+let name = "John";
+console.log(`${name} is ${x} years old.`);
 ```
 
 ## `null` vs. `undefined`
@@ -244,7 +241,6 @@ switch (action) {
     takeNap();
 }
 ```
-
 
 ## Objects
 
@@ -444,3 +440,62 @@ function multiply(x) {
   return inner1(x);
 }
 ```
+
+## Classes
+
+JavaScript classes:
+
+- Just functions
+- Instantiate with `new`
+- `new` returns an object containing methods + properties that the class specified
+
+
+```
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+  sayHello() {
+    return `Hello, I'm ${this.name}`;
+  }
+}
+
+const p = new Person("Durango");  // error - Durango is actually a dog
+p.sayHello();
+```
+
+### Classes - Mixin Pattern
+
+```
+const withAuthentication = (cls) =>
+  class extends cls {
+    authenticate() {
+      console.log("Fuckin' authenticated! 🤘🎸");
+      return true;
+    }
+  }
+class Admin extends withAuthentication(Person) { }
+
+boss.authenticate(); // Fuckin' authenticated! 🤘🎸
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
