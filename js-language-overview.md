@@ -10,6 +10,10 @@ JavaScript supports OOP with object prototypes instead of classes.
 
 JavaScript supports functional programming: functions are objects and may be stored in variables, passed around like any other object.
 
+## Language and Runtime
+
+JavaScript
+
 ## Types
 
 - Number
@@ -479,23 +483,71 @@ class Admin extends withAuthentication(Person) { }
 boss.authenticate(); // Fuckin' authenticated! 🤘🎸
 ```
 
+## Async Programming
+
+Callback-based. You know, like `setTimeout()`.
+
+The core language doesn't specify any async features, but it's crucial when interacting w/ external world.
+
+```
+fs.readFile(filename, (err, content) => {
+  // this callback invoked when file read, which could take a while
+  if (err) {
+    throw err;
+  }
+
+  console.log(content);
+});
+```
+
+Promise-based.
+
+```
+fs.readFile(filename)
+  .then((content) => {
+    console.log(content);
+  }).catch((err) => {
+    throw err;
+  });
+```
+
+Async/await. This is a syntactic sugar for Promises.
+
+```
+async function readFile(filename) {
+  const content = await fs.readFile(filename);
+  console.log(content);
+}
+```
+
+If you have an async value, it's not possible to get its value synchronously.
+
+- In a promise, can only access the value in `then()` method.
+- `await` can only be used in an async context
+  - Usually an async function or module
+- Promises are never blocking
+- Promises similar to `monads` from functional programming
+
+Single-threaded model has made Node.js a popular choice for server-side programming.
 
 
+## Paralleling
+
+You can't.
+
+If you truly need it, you probably need `workers`.
 
 
+## Modules
 
+Supported by most runtimes.
 
+```
+import { foo } from "./foo.js";
 
+// Unexported, so local to the module
+const b = 2;
 
-
-
-
-
-
-
-
-
-
-
-
+export const a = 1;
+```
 
