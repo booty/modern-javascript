@@ -25,6 +25,16 @@ JavaScript supports functional programming: functions are objects and may be sto
 - undefined
 - some built-in Error types
 
+# Strings
+
+New-school interpolation
+
+```
+let x = 42;
+let name = "John";
+console.log(`${name} is ${x} years old.`);
+```
+
 # Numbers
 
 Number is a double-precision 64-bit IEE754 value.
@@ -398,9 +408,39 @@ cool.apply(null, my_ary);     // got 3 args
 
 ### Anonymous Functions
 
+```
+let sum = function() {
+  return arguments[0] + arguments[1];
+}
 
+sum(1, 2);      // 3
+```
 
+### Arrow Functions
 
+```
+function times(ary, x) {
+  return ary.map((num) => num * x);
+}
 
+times([1, 5, 99], 2);
+```
 
+### Inner Functions
 
+N.B.: Nested functions in JavaScript have access to variables in the parent function's scope.
+
+```
+function multiply(x) {
+  function inner1(inner1x) {
+    function inner2(inner2x) {
+      return multiplier * inner2x;
+    }
+
+    return inner2(x);
+  }
+  let multiplier = 2;
+
+  return inner1(x);
+}
+```
