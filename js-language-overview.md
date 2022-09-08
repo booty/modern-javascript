@@ -37,7 +37,7 @@ When we say "integer" we mean "a representation of an int using a Number value."
 
 An *apparent integer* is actually a float. 💩
 
-```
+```javascript
 0.1 + 0.2 == 0.30000000000000004;
 ```
 
@@ -49,7 +49,7 @@ An *apparent integer* is actually a float. 💩
 
 `parseInt` and `parseFloat` are built in functiona.
 
-```
+```javascript
 // Second arg is an optional base.
 parseInt('123', 10);    // 123
 parseInt('123yourmom', 10);    // 123
@@ -70,7 +70,7 @@ parseFloat('123.45');   // 123
 
 `NaN` is toxic. (So is JavaScript, but that's another story....)
 
-```
+```javascript
 NaN + 5; // NaN
 ```
 
@@ -78,7 +78,7 @@ Test with `Number.isNaN(foo)`
 
 But don't use `isNaN` because it sucks for stupid legacy reasons. 💩 lmao
 
-```
+```javascript
 isNaN('hello');       // true
 isNaN('1');           // false
 isNaN(undefined);     // true
@@ -89,7 +89,7 @@ isNaN([1,2])          // true
 
 To Infinity and beyond.
 
-```
+```javascript
 1 / 0;                // Infinity
 -1 / 0;               // -Infinity
 isFinite(1 / 0);      // false
@@ -101,7 +101,7 @@ isFinite(NaN);        // false
 
 They're UTF-16 code units. Each Unicode character is either 1 or 2 code units.
 
-```
+```javascript
 'hello'.length;                           // 5
 'hello'.charAt(0);                        // "h"
 'hello, world'.replace('world', 'mars');  // "hello, mars"
@@ -110,7 +110,7 @@ They're UTF-16 code units. Each Unicode character is either 1 or 2 code units.
 
 New-school interpolation
 
-```
+```javascript
 let x = 42;
 let name = "John";
 console.log(`${name} is ${x} years old.`);
@@ -180,7 +180,7 @@ const name = cachedName || (cachedName = getName());
 
 if/else
 
-```
+```javascript
 let name = 'kittens';
 
 if (name === 'puppies') {
@@ -194,7 +194,7 @@ if (name === 'puppies') {
 
 while and do/while
 
-```
+```javascript
 while(true) {
   // infinity!
 }
@@ -207,7 +207,7 @@ do {
 
 for
 
-```
+```javascript
 for (let i = 0; i < 5; i++) {
   // runs 5 times
 }
@@ -215,7 +215,7 @@ for (let i = 0; i < 5; i++) {
 
 for/of
 
-```
+```javascript
 for (const value of array) {
   // do something with value
 }
@@ -223,7 +223,7 @@ for (const value of array) {
 
 for/in
 
-```
+```javascript
 for (const prop in object) {
   // do something with prop
 }
@@ -231,7 +231,7 @@ for (const prop in object) {
 
 switch
 
-```
+```javascript
 // comparisons made with ===
 switch (action) {
   case 'sketch':  // will fallthrough
@@ -254,14 +254,14 @@ Similar to hashes in Perl, Ruby.
 
 Name is always a JavaScript string.
 
-```
+```javascript
 const obj = new Object();   // same as below
 const obj = {};             // "object literal syntax", preferred
 ```
 
 Accessing elements:
 
-```
+```javascript
 const obj = {
   name: 'Carrot',
   _for: 'Max', // 'for' is a reserved word, use '_for' instead.
@@ -279,7 +279,7 @@ Iterate through with `for (const x in obj) { x }`
 
 ## Object Prototypes
 
-```
+```javascript
 // prototype
 function Person(name, age) {
   this.name = name;
@@ -297,7 +297,7 @@ you.hair = true;
 
 They work like regular objects but have a magic property called `length.`
 
-```
+```javascript
 const a = ['dog', 'cat', 'hen'];
 a[100] = 'fox';
 a.length;                             // 101
@@ -306,7 +306,7 @@ typeof a[90];                         // undefined
 
 Old-fashioned iteration
 
-```
+```javascript
 for (let i = 0; i < a.length; i++) {
   // Do something with a[i]
 }
@@ -314,7 +314,7 @@ for (let i = 0; i < a.length; i++) {
 
 ES2015 style iteration
 
-```
+```javascript
 const ary = ['dog', 'cat', 'hen'];
 ary[10] = 'fox';
 ary.length; // 111
@@ -340,7 +340,7 @@ fox
 
 ECMAScript5
 
-```
+```javascript
 ['dog', 'cat', 'hen'].forEach(function(currentValue, index, array) {
   console.log((index + 1) + '/' + array.length + ' ' + currentValue);
 });
@@ -358,7 +358,7 @@ You can call a function without the parameters it expects -- all parameters are 
 
 Can also pass in extra params.
 
-```
+```javascript
 function add(x,y) {
   return x + y
 }
@@ -370,7 +370,7 @@ add(2, 3, 4);   // 5 (the last arg was ignored)
 
 `arguments` - An array of all arguments.
 
-```
+```javascript
 function add() {
   let sum = 0;
   for (const x of arguments) {
@@ -384,7 +384,7 @@ add(1, 2, 3, 4);    // 10
 
 ### Rest Parameter Operator
 
-```
+```javascript
 function foo(a, ...otherCrap) {
   console.log('a is ' + a + ' and there were ' + otherCrap.length + ' args I do not care about');
 }
@@ -395,7 +395,7 @@ foo(42, "your", "mom", "hello");  // a is 42 and there were 3 args I do not care
 
 ### Apply
 
-```
+```javascript
 function cool() {
   console.log('got ' + arguments.length + ' args');
 }
@@ -408,7 +408,7 @@ cool.apply(null, my_ary);     // got 3 args
 
 ### Anonymous Functions
 
-```
+```javascript
 let sum = function() {
   return arguments[0] + arguments[1];
 }
@@ -418,7 +418,7 @@ sum(1, 2);      // 3
 
 ### Arrow Functions
 
-```
+```javascript
 function times(ary, x) {
   return ary.map((num) => num * x);
 }
@@ -430,7 +430,7 @@ times([1, 5, 99], 2);
 
 N.B.: Nested functions in JavaScript have access to variables in the parent function's scope.
 
-```
+```javascript
 function multiply(x) {
   function inner1(inner1x) {
     function inner2(inner2x) {
@@ -454,7 +454,7 @@ JavaScript classes:
 - `new` returns an object containing methods + properties that the class specified
 
 
-```
+```javascript
 class Person {
   constructor(name) {
     this.name = name;
@@ -470,7 +470,7 @@ p.sayHello();
 
 ### Classes - Mixin Pattern
 
-```
+```javascript
 const withAuthentication = (cls) =>
   class extends cls {
     authenticate() {
@@ -489,7 +489,7 @@ Callback-based. You know, like `setTimeout()`.
 
 The core language doesn't specify any async features, but it's crucial when interacting w/ external world.
 
-```
+```javascript
 fs.readFile(filename, (err, content) => {
   // this callback invoked when file read, which could take a while
   if (err) {
@@ -502,7 +502,7 @@ fs.readFile(filename, (err, content) => {
 
 Promise-based.
 
-```
+```javascript
 fs.readFile(filename)
   .then((content) => {
     console.log(content);
@@ -513,7 +513,7 @@ fs.readFile(filename)
 
 Async/await. This is a syntactic sugar for Promises.
 
-```
+```javascript
 async function readFile(filename) {
   const content = await fs.readFile(filename);
   console.log(content);
@@ -542,7 +542,7 @@ If you truly need it, you probably need `workers`.
 
 Supported by most runtimes.
 
-```
+```javascript
 import { foo } from "./foo.js";
 
 // Unexported, so local to the module
